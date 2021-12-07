@@ -1,0 +1,96 @@
+-- COMPILARE FUNTORI --
+
+Un contesto potrebbe essere quello di avere un'interfaccia e varie implementazioni
+Definisco un funtore che riceve come parametro una delle possibili implementazoni
+di tale interfaccia e la usa in un programma
+
+note:
+per NomeQualcosaQualcosaltro ci si riferisce al nome definito all'interno del file
+(module NomeModulo)
+per NomeFileQualcosa ci si riferisce al file che contiene Qualcosa
+
+Bisogna:
+-compilare con ocamlc -c Interafccia.mli
+-compilare con ocamlc -c ImplemetazioneN.ml
+-compialre con ocamlc -c Funtore.ml
+	Nel funtore
+	1) per riferirsi a quale interfaccia riferirsi si scrive:
+		module Funtore (Alias : NomeFileInterfaccia.NomeModuloInterfaccia) = ...
+	oppure
+	2) si può specificare in testa:
+		open NomeFileInterfaccia (senza il .mli)
+	per poi scrivere:
+		module Funtore (Alias : NomeModuloInterfaccia) (sempre senza l'estensione)
+-compilare il main con ocamlc [-o nome] Modulo1.cmo Modulo2.cmo ... main.ml
+	dove Modulo1.cmo ... sono i file che contengono i moduli che usa il main
+	in questo caso Funtore.cmo e ImplementazioneN.cmo
+	1) in testa al file bisogna specificare:
+		open NomeFileFuntore;;
+		open NomeFileImplementazione;;
+		...
+	per poi scrivere:
+		module User = NomeFuntore(NomeModuloImplementazione)
+		
+	oppure
+	2) usare la notazione NomeFileModulo.NomeModulo tipo:
+		module User = FileFuntore.NomeFuntore(NomeFileImplementazione.NomeModuloImplementazione)
+	e usare User.funzione1 e le varie altre cose del modulo
+	
+ATTENZIONE AI FUNTORI. I nomi dei file devono essere con la prima lettera maiuscola.
+
+Carrying and continuations (messaggio copiato da telegram)
+/*************
+Mi permetto di fare qualche piccola precisazione su questa affermazione di per sé giustissima, magari posso aiutare qualcuno in più a capire. Mi rendo conto non essere un concetto banale (lo diventa dopo aver capito).
+
+La sintassi può sembrare bizzarra per una funzione con due argomenti perché in realtà non è del tutto vero che la funzione prende due argomenti, al contrario ne può tranquillamente prendere uno solo. Se vogliamo, la parentesizzazione più adeguata di int -> int -> int sarebbe int -> ( int -> int).
+
+Questo cosa significa? Che la funzione non prende due interi, ma piuttosto prende un intero e ritorna una funzione che a sua volta prende un intero e ritorna un intero. È questo che @wcazzola intende quando dice che "gli argomenti sono passati in maniera funzionale".
+
+Esempio banale:
+
+let sum a b = a + b;;
+è int -> int -> int
+
+Ma io posso tranquillamente chiamare
+sum 2
+quindi senza secondo argomento e ottenere un int -> int
+
+Tanto è vero che volendo quella cosa la potete assegnare:
+let foo = sum 2;;
+
+Al che chiamando, ad esempio
+foo 3;;
+Otterrete 5 come risultato.
+
+Quindi scrivere
+sum 2 3
+è equivalente a scrivere
+(sum 2) (3)
+
+Spero sia di aiuto a qualcuno
+(questa cosa tra l'altro ha un nome, ma non so se l'abbiate già fatta a lezione quindi non faccio spoiler)
+**************************/
+
+I MODULI servono per realizzare dei nuovi tipi di dato
+
+module A:
+	sig:
+		..
+		..
+		..
+	end =
+	struct
+		..
+		..
+		..
+	end;;
+
+Solitamente sig-end e struct-end sono in file separati
+sign-end è un opzionale pubblica interfaccia che espone un type e le sue operazioni
+struct-end indica l'implementazione
+
+PUNTATORI
+
+l = ref []					-> l puntatore a lista
+l := (newElement)::!l 		-> update di l
+!l 							-> valore del puntatore

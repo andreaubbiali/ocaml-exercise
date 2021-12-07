@@ -1,0 +1,77 @@
+Enter in wecode.sorint.it. Fork the repository universe/go-base, go to the settings of your forked repository and in the tab collaborators add me (aubbiali).
+
+
+IN TERMINAL:
+- start vpn
+	sudo openfortivpn
+- execute this command "kubectl port-forward service/postgres 6432:5432"
+
+use postman to do this call. Set in the url the path written and if there is a body add in the 'body' tab the body written.
+
+
+THINGS TODO:
+
+- GetReservations()
+	path: 			localhost:8080/reservations
+	type:			GET
+	behaviour: 		return all reservations in database
+	
+	
+- CreateUser() (There is the first part of the api in the code.)
+	path:			localhost:8080/user
+	type:			POST
+	behaviour:		continue the api, add the user into database
+	body:
+			{
+				"Name": "Giulio",
+				"LastName": "Paganoni",
+				"Email": "gpaganoni@sorint.it"
+			}
+	
+- CreateReservation()
+	path:			localhost:8080/reservation
+	type:			POST
+	behaviour:		create the reservation. If the id of the user is 1 the field is_active must be true, false otherwise.
+	body:	
+
+
+			{
+				"Description": "descrizione 4",
+				"UserID": 4,
+				"IsActive": true
+			}
+
+
+
+			
+	improvements:		instead of control the id, if the user name is "Andrea" the field is_active must be true, false otherwise. 
+					You have to use the same body request (need to get from db the users and check who is andrea).
+	
+IF YOU NEED SOME HELP LET ME KNOW.
+
+
+For now if you want to do some practice on the project you can add others api to our project.
+update user/delete user
+update reservation/delete reservation
+
+localhost:8080/edit_user
+
+			{
+				"ID": 10,
+				"Name": "Gastone",
+				"LastName": "Paperone",
+				"Email": "gpaperone@topolinia.it"
+			}
+
+localhost:8080/delete_user/12
+
+localhost:8080/edit_reservation
+
+			{
+				"ID": 5,		
+				"Description": "brutta descrizione",
+				"UserID": 11,
+				"IsActive": true
+			}
+			
+localhost:8080/delete_reservation/5		
