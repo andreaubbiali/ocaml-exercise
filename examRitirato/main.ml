@@ -1,8 +1,8 @@
 open FRM;;
 
+module prova = FRM.FRM(FRMListInt);;
+
 let main() = 
-    let lstInt = FRM.FRM(FRMListInt)
-    in
     Printf.printf "ciao\n";;
 
 main();;
