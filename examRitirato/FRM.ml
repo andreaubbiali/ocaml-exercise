@@ -1,20 +1,16 @@
-module type FRMADT = sig
+open FRMInterface;;
 
-    type t
-
-    val toLst: t list
-    
-end;;
-
-module FRM (Frm: FRMADT) = struct
+module FRM (Frm: FRMInterface) = struct
     open Frm;;
 
-    let gfilter f = 
-        let rec filter lst = function
-             []                     -> lst
-            | h::t when f(h)        -> filter (h::lst) t
-            | h::t                  -> filter lst t
-        in filter [] Frm.toLst;;
+    let gfilter f el = 
+        let rec filter res index = match (has_next index el) with
+            true             -> if f (next index el) then
+                                    filter (add res (next index el)) (index+1)
+                                 else
+                                    filter res (index+1)
+        |   false            -> res
+        in filter empty 0;;
 
 end;;
 

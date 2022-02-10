@@ -1,7 +1,14 @@
-module FRMString = struct
+module FRMListInt = struct
 
-    type t = string list;;
+    type primitive = int;;
+    type t = primitive list;;
 
-    let toLst e = e;;
+    let empty = [];;
+
+    let next index lst = List.nth lst index;;
+
+    let has_next index lst = index +1 < (List.length lst);;
+
+    let add lst el = el::lst;;
 
 end;;
