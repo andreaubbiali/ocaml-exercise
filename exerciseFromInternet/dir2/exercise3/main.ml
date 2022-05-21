@@ -12,7 +12,7 @@ let main() =
     Printf.printf "Expected '7:' got: %s\n" (e1q2 7 ":");
     Printf.printf "Expected '0:7:' got: %s\n" (e1q2 70 ":");
     Printf.printf "Expected '2:7:' got: %s\n" (e1q2 72 ":");
-    Printf.printf "Expected '7:8:9' got: %s\n" (e1q2 987 ":");
-    Printf.printf "Expected '6:7:8:9' got: %s\n" (e1q2 9876 ":");;
+    Printf.printf "Expected '7:8:9:' got: %s\n" (e1q2 987 ":");
+    Printf.printf "Expected '6:7:8:9:' got: %s\n" (e1q2 9876 ":");;
 
 main();;
