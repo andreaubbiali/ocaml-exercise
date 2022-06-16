@@ -18,10 +18,8 @@ module Matrix = struct
     let summable a b = 
         ((lenArr a) == (lenArr b)) && ((lenFstRow a) == (lenFstRow b));;
 
-    let sumArray 
-
-    let sum a b = if (isMatrix a) && (isMatrix b) && (summable a b) then 
-                    let rec sumRow
+     let sum a b = if (isMatrix a) && (isMatrix b) && (summable a b) then 
+                    a
                 else
                     raise OperationException;;
 
