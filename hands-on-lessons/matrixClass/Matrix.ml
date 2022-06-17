@@ -18,13 +18,11 @@ module Matrix = struct
     let sameLen a b = 
         ((lenArr a) == (lenArr b)) && ((lenFstRow a) == (lenFstRow b));;
 
-    let makeOp f a b res =
-        let rowNum = lenFstRow a in
-        let colNum = lenArr a in
+    let makeOp f rowNum colNum =
             let rec exec c r = match (c, r) with
-                (cc, rr) when cc == colNum && rr == rowNum      -> f a b res cc rr; res
-            |   (cc, rr) when rr == rowNum                      -> f a b res cc rr; exec (cc+1) 0
-            |   (cc, rr)                                        -> f a b res cc rr; exec cc (rr+1)
+                (cc, rr) when cc == colNum && rr == rowNum      -> f cc rr
+            |   (cc, rr) when rr == rowNum                      -> f cc rr; exec (cc+1) 0
+            |   (cc, rr)                                        -> f cc rr; exec cc (rr+1)
             in exec 0 0;;
 
     let (+) a b res col row = res.(col).(row) <- (a.(col).(row) + b.(col).(row));;
@@ -32,13 +30,15 @@ module Matrix = struct
 
     let sum a b = if (isMatrix a) && (isMatrix b) && (sameLen a b) then 
                     let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in
-                    makeOp (+) a b res
+                    makeOp (fun col row -> (+) a b res col row) 3 3;
+                    res
                 else
                     raise OperationException;;
 
     let multiplication a b =  if (isMatrix a) && (isMatrix b) && (sameLen a b) then 
                     let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in
-                    makeOp ( * ) a b res
+                    makeOp (fun col row -> ( * ) a b res col row) 3 3;
+                    res
                 else
                     raise OperationException;;
 
