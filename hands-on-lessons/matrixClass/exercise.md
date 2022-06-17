@@ -16,3 +16,10 @@ Let aᵢⱼ denotes the i,j-th element of matrix A, located at row i, column j. 
     matrix norm (matrix 1-norm) a = ‖A‖ where a in Z, A in Ζᵐˣⁿ (a = maxⱼ Σᵢ | aᵢⱼ | for i = 1,...,m j = 1, ..., n).
 
 Note that in each case we state the proper matrix dimensions for the operation to be valid. For example, when multiplying two matrices A and B, the number of columns of A must match the number of rows of B.
+
+# to execute:
+
+ocamlc Matrix.ml
+ocamlc Operations.ml
+ocamlc Matrix.cmo Operations.cmo main.ml
+./a.out
