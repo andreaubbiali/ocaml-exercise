@@ -27,6 +27,9 @@ module Matrix = struct
 
     let (+) a b res col row = res.(col).(row) <- (a.(col).(row) + b.(col).(row));;
     let ( * ) a b res col row = res.(col).(row) <- (a.(col).(row) * b.(col).(row));;
+    let printCell a rowNum col row = match row with
+        n when n == rowNum      -> Printf.printf "%d\n" a.(col).(row)
+    |   _                       -> Printf.printf "%d " a.(col).(row);;
 
     let sum a b = if (isMatrix a) && (isMatrix b) && (sameLen a b) then 
                     let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in
@@ -42,16 +45,7 @@ module Matrix = struct
                 else
                     raise OperationException;;
 
-    let printRow arr = 
-        let rec p = function 
-            0   -> Printf.printf "%d\n" arr.(0)
-        |   n   -> Printf.printf "%d " arr.(n); p (n-1)
-        in p (lenArr arr);;
-
-    let print arr = 
-        let rec print = function
-            0   -> printRow arr.(0)
-        |   n   -> printRow arr.(n); print (n-1)
-        in print (lenArr arr);;
+    let print m = if (isMatrix m) then
+                    makeOp (fun col row -> printCell m 3 col row) 3 3;; 
 
 end;;
