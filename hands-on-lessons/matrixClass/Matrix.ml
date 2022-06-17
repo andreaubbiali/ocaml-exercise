@@ -29,7 +29,7 @@ module Matrix = struct
         |   n   -> Printf.printf "%d " arr.(n); p (n-1)
         in p (lenArr arr);;
 
-    let printMatrix arr = 
+    let print arr = 
         let rec print = function
             0   -> printRow arr.(0)
         |   n   -> printRow arr.(n); print (n-1)
