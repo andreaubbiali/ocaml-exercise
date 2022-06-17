@@ -3,6 +3,7 @@ module type OperationsADT =
 
         type t
         exception OperationException
+        val equivalence: t -> t -> bool
         val sum: t -> t -> t
         val multiplication: t -> t -> t
         val print: t -> unit
@@ -16,6 +17,8 @@ module Operations(A: OperationsADT) = struct
 
     let ( * ) a b = A.multiplication a b;;
 
+    let ( = ) a b = A.equivalence a b;;
+
     let exec m1 m2 = Printf.printf "START \n";
             Printf.printf "Matrix 1 \n"; 
             A.print m1;
@@ -24,6 +27,10 @@ module Operations(A: OperationsADT) = struct
             Printf.printf "\nSum \n";
             A.print (m1 + m2);
             Printf.printf "\nmultiplication \n";
-            A.print (m1 * m2);;
+            A.print (m1 * m2);
+            Printf.printf "\nequivalent?(expected false) \n";
+            Printf.printf "%b \n" (m1 = m2);
+            Printf.printf "\nequivalent?(expected true) \n";
+            Printf.printf "%b \n" (m1 = m1);;
 
 end;;

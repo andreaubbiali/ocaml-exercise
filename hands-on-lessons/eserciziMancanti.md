@@ -8,6 +8,4 @@
 
 - fewMoreMath
 
-- matrixClass
-
 - polishCalculator
