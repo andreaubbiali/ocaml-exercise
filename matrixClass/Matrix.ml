@@ -28,6 +28,7 @@ module Matrix = struct
 
     let eq a b col row =  if not(a.(col).(row) == b.(col).(row)) then
                             raise MatrixNotEqual;;
+    let cp a res col row = res.(col).(row) <- a.(col).(row);;
     let (+) a b res col row = res.(col).(row) <- (a.(col).(row) + b.(col).(row));;
     let ( * ) a b res col row = res.(col).(row) <- (a.(col).(row) * b.(col).(row));;
     let printCell a rowNum col row = match row with
@@ -42,6 +43,13 @@ module Matrix = struct
                                 false
                         else
                             false;;
+
+    let copy a = if (isMatrix a) then
+                    let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in
+                    makeOp (fun col row -> cp a res col row) 3 3;
+                    res
+                else
+                    raise OperationException;;
 
     let sum a b = if (isMatrix a) && (isMatrix b) && (sameLen a b) then 
                     let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in

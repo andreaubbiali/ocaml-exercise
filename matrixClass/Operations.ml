@@ -4,6 +4,7 @@ module type OperationsADT =
         type t
         exception OperationException
         val equivalence: t -> t -> bool
+        val copy: t -> t
         val sum: t -> t -> t
         val multiplication: t -> t -> t
         val print: t -> unit
@@ -31,6 +32,8 @@ module Operations(A: OperationsADT) = struct
             Printf.printf "\nequivalent?(expected false) \n";
             Printf.printf "%b \n" (m1 = m2);
             Printf.printf "\nequivalent?(expected true) \n";
-            Printf.printf "%b \n" (m1 = m1);;
+            Printf.printf "%b \n" (m1 = m1);
+            Printf.printf "\ncopy of matrix1 \n";
+            A.print (A.copy m1);;
 
 end;;
