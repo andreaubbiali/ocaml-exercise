@@ -29,17 +29,6 @@ module Matrix = struct
 
     let (+) a b res col row = res.(col).(row) <- (a.(col).(row) + b.(col).(row));;
     let ( * ) a b res col row = res.(col).(row) <- (a.(col).(row) * b.(col).(row));;
-(*
-    let (+) a b = 
-        let rowNum = lenFstRow a in
-        let colNum = lenArr a in
-        let res = Array.make_matrix (colNum+1) (rowNum+1) 0 in
-            let rec sumMatrix c r = match (c, r) with
-                (cc, rr) when cc == colNum && rr == rowNum      -> res.(cc).(rr) <- (a.(cc).(rr) + b.(cc).(rr)); res
-            |   (cc, rr) when rr == rowNum                      -> res.(cc).(rr) <- (a.(cc).(rr) + b.(cc).(rr)); sumMatrix (cc+1) 0
-            |   (cc, rr)                                        -> res.(cc).(rr) <- (a.(cc).(rr) + b.(cc).(rr)); sumMatrix cc (rr+1)
-            in sumMatrix 0 0;;
-*)
 
     let sum a b = if (isMatrix a) && (isMatrix b) && (sameLen a b) then 
                     let res = Array.make_matrix (Array.length a) (Array.length a.(0)) 0 in
