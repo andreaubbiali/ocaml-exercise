@@ -6,6 +6,7 @@ module type OperationsADT =
         val equivalence: t -> t -> bool
         val copy: t -> t
         val sum: t -> t -> t
+        val scalarMultiplication: t -> int -> t
         val multiplication: t -> t -> t
         val print: t -> unit
 
@@ -34,6 +35,8 @@ module Operations(A: OperationsADT) = struct
             Printf.printf "\nequivalent?(expected true) \n";
             Printf.printf "%b \n" (m1 = m1);
             Printf.printf "\ncopy of matrix1 \n";
-            A.print (A.copy m1);;
+            A.print (A.copy m1);
+            Printf.printf "\nmultiplication matrix1 * 3 (expected 15) \n";
+            A.print (A.scalarMultiplication m1 3);;
 
 end;;
